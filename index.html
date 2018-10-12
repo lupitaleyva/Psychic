@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us"></html>
+<head>
+  <meta charset="UTF-8">
+
+        <title>
+            The Psychic Game
+        </title>
+       
+    </head>
+    <body>
+
+        <h1>Guess what letter I´m thinking of...</h1>
+        <p id="Wins">Wins</H1>
+        <p id="Losses">Losses</p>
+        <p id="Guesses left">Guesses left</p>
+        <p id="Your guesses so far">Your  guesses so far</p>   
+  
+
+  <div id="wordGame"></div>
+
+</body>
+</html>
+    <script type="text/javascript">
+  
+    
+    var letterChoices = ["a", "b", "c","d", "e", "f"];
+    var guessedLetters = [];
+    var letterToGuess = null;
+    var guessedLeft = 5;
+    var wins = 0;
+    var losses = 0;
+
+
+
+    document.getElementById("Wins").innerHTML= "Wins: " + wins;
+    document.getElementById("Losses").innerHTML= "Losses: " + losses;
+    document.getElementById("Guesses left").innerHTML="Guesses left: " + guessedLeft;
+    document.getElementById("Your guesses so far").innerHTML= "Your guesses so far: " + guessedLetters;
+
+    var letterToGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+    document.onkeyup = function(event) {
+      
+      guessedLeft=guessedLeft-1;
+      document.getElementById("Guesses left").innerHTML="Guesses left: " + guessedLeft;
+      
+      
+
+      var letterChoice = event.key;
+
+      guessedLetters.push (letterChoice);
+      document.getElementById("Your guesses so far").innerHTML= "Your guesses so far: " + guessedLetters;
+
+
+
+      console.log ("correct answer: " + letterToGuess);
+
+      //Win-win condition
+      if (letterToGuess === letterChoice){
+          wins=wins + 1;
+          document.getElementById("Wins").innerHTML= "Wins: " + wins;
+          letterToGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+          alert("You Win!");
+      }
+      //lose-lose condition
+    if (guessedLeft === 0){
+          losses=losses + 1;
+          document.getElementById("Losses").innerHTML= "Losses: " + losses;
+          letterToGuess = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+          alert("You lose!");
+          guessedLeft = 5;
+      }
+};
+  </script>
+
+
+
+
+
+
